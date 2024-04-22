@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const CoffeeCard = ({coffee}) => {
@@ -41,6 +42,7 @@ const CoffeeCard = ({coffee}) => {
   }
 
   return (
+    // <Link to={`/updateCoffee/${coffee?._id}`}>
     <div className="card card-side bg-base-100 shadow-xl">
       <figure>
         <img src={coffee?.photoURL} alt="Movie" />
@@ -49,18 +51,29 @@ const CoffeeCard = ({coffee}) => {
         <div>
           <h2 className="card-title">Name:{coffee?.name}</h2>
           <h2 className="card-title">Taste:{coffee?.taste}</h2>
-          <h2 className="card-title">Supplier:{coffee?.supplier}</h2>
+          <h2 className="card-title">Taste:{coffee?.quantity}</h2>
+          <h2 className="card-title">Taste:{coffee?.supplier}</h2>
+          <h2 className="card-title">Supplier:{coffee?.category}</h2>
           <p>Details:{coffee?.details}</p>
         </div>
         <div className="">
           <div className="join join-vertical space-y-4">
             <button className="btn join-item">View</button>
-            <button className="btn join-item">Edit</button>
-            <button onClick={()=>handleDelete(coffee?._id)} className="btn join-item">X</button>
+            <Link className="btn join-item" to={`/updateCoffee/${coffee?._id}`}>
+              <button>Edit</button>
+            </Link>
+
+            <button
+              onClick={() => handleDelete(coffee?._id)}
+              className="btn join-item"
+            >
+              X
+            </button>
           </div>
         </div>
       </div>
     </div>
+    // </Link>
   );
 }
 
