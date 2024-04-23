@@ -27,14 +27,6 @@ const NavBar = () => {
       >
         Sign Up
       </NavLink>
-      <NavLink
-        className={({ isActive }) =>
-          isActive ? "border-b-2 border-pink-600" : ""
-        }
-        to={"/"}
-      >
-        Home
-      </NavLink>
     </div>
   );
 }
