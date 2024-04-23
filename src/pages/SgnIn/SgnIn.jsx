@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import useContextAPI from "../../hooks/useContextAPI"
+import useContextAPI from "../../hooks/useContextAPI";
 import useUsers from "../../hooks/useUsers";
 
 const SgnIn = () => {
@@ -23,8 +23,7 @@ const SgnIn = () => {
 
         // update last logged at int the database
 
-
-        fetch(`http://localhost:5000/users`, {
+        fetch(`https://coffee-store-server-lilac-one.vercel.app/users`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -97,6 +96,6 @@ const SgnIn = () => {
       </div>
     </div>
   );
-}
+};
 
-export default SgnIn
+export default SgnIn;

@@ -1,55 +1,50 @@
-
 import Swal from "sweetalert2";
 import useContextAPI from "../../hooks/useContextAPI";
 import useUsers from "../../hooks/useUsers";
 
-
 const SignUp = () => {
+  const { handleSignUp } = useContextAPI();
+  const { loadUsers, isLoading, refetch } = useUsers();
 
-    const { handleSignUp} = useContextAPI();
-    const { loadUsers, isLoading, refetch } = useUsers();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
 
+    handleSignUp(email, password)
+      .then((result) => {
+        console.log(result.user);
 
+        // new user has been created
+        const createAt = result?.user?.metadata?.creationTime;
+        const user = { email, createAt };
 
-    const handleSubmit = e =>{
-        e.preventDefault();
-        const form = e.target;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(email,password);
-
-        handleSignUp(email,password)
-        .then(result=>{
-            console.log(result.user);
-
-            // new user has been created
-            const createAt = result?.user?.metadata?.creationTime;
-            const user = {email,createAt};
-
-            fetch(`http://localhost:5000/users`, {
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                body:JSON.stringify(user)
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                if (data.insertedId) {
-                     Swal.fire({
-                       title: "Success!",
-                       text: "User Added Successfully",
-                       icon: "success",
-                       confirmButtonText: "Cool",
-                     });
-                     refetch();
-                     form.reset()
-                }
-              })
-              .catch((error) => console.error(error));
+        fetch(`https://coffee-store-server-lilac-one.vercel.app/users`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
         })
-        .catch(error=>console.error(error))
-    }
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.insertedId) {
+              Swal.fire({
+                title: "Success!",
+                text: "User Added Successfully",
+                icon: "success",
+                confirmButtonText: "Cool",
+              });
+              refetch();
+              form.reset();
+            }
+          })
+          .catch((error) => console.error(error));
+      })
+      .catch((error) => console.error(error));
+  };
 
   return (
     <div>
@@ -98,6 +93,6 @@ const SignUp = () => {
       </div>
     </div>
   );
-}
+};
 
-export default SignUp
+export default SignUp;

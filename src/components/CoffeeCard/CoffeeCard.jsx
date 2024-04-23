@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
   const handleDelete = (_id) => {
@@ -16,9 +16,12 @@ const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/coffee/${_id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://coffee-store-server-lilac-one.vercel.app/coffee/${_id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -29,7 +32,7 @@ const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
                 icon: "success",
               });
             }
-            const remaining = coffeeData.filter(cof=> cof._id !== _id);
+            const remaining = coffeeData.filter((cof) => cof._id !== _id);
             setCoffeeData(remaining);
           })
           .catch((error) => console.error(error));
@@ -77,8 +80,8 @@ const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
 
 CoffeeCard.propTypes = {
   coffee: PropTypes.object.isRequired,
-  coffeeData:PropTypes.array.isRequired,
-  setCoffeeData:PropTypes.func.isRequired,
+  coffeeData: PropTypes.array.isRequired,
+  setCoffeeData: PropTypes.func.isRequired,
 };
 
-export default CoffeeCard
+export default CoffeeCard;

@@ -25,7 +25,7 @@ const AddCoffee = () => {
     console.log(coffeeInfo);
 
     //send data to the server
-    fetch(`http://localhost:5000/coffee`, {
+    fetch(`https://coffee-store-server-lilac-one.vercel.app/coffee`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
