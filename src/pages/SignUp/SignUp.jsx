@@ -7,7 +7,7 @@ import useUsers from "../../hooks/useUsers";
 const SignUp = () => {
 
     const { handleSignUp} = useContextAPI();
-     const { loadUsers, isLoading, refetch } = useUsers();
+    const { loadUsers, isLoading, refetch } = useUsers();
 
 
 
