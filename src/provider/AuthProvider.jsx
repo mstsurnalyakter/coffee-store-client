@@ -1,12 +1,30 @@
 
 import PropTypes from 'prop-types'
-import { createContext } from "react"
+import { createContext, useState } from "react"
+import {  createUserWithEmailAndPassword } from "firebase/auth";
+import auth from '../firebase/firebase.config';
+
+
 export const AuthContext = createContext(null);
 
 
 const AuthProvider = ({children}) => {
+
+    const [users,setUsers] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+
+    const handleSignUp = (email, password)=>{
+        setLoading(true)
+        return createUserWithEmailAndPassword(auth, email, password)
+
+    }
+
+
     const authInfo = {
-        name:"Alex"
+        users,
+        loading,
+        handleSignUp
     }
   return (
     <AuthContext.Provider value={authInfo}>

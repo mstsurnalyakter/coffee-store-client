@@ -5,6 +5,7 @@ import AddCoffee from "../pages/AddCoffee/AddCoffee";
 import UpdateCoffee from "../pages/UpdateCoffee/UpdateCoffee";
 import SignUp from "../pages/SignUp/SignUp";
 import SgnIn from "../pages/SgnIn/SgnIn";
+import Users from "../pages/Users/Users";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path:"/signIn",
         element:<SgnIn/>
+      },
+      {
+        path:"/users",
+        element:<Users/>
       }
     ],
   },
